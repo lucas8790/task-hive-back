@@ -265,7 +265,8 @@ public class Fachada {
 		return negocioRegistroStatus.procurarRegitroId(id);
 	}
     
-	public RegistroStatus procurarRegistroTarefa(Tarefa tarefa){
+	public RegistroStatus procurarRegistroTarefa(Long tarefaId) throws TarefaNaoExisteException{
+		Tarefa tarefa = negocioTarefa.procurarTarefaId(tarefaId);
 		return negocioRegistroStatus.procurarRegistroTarefa(tarefa);
 	}
  

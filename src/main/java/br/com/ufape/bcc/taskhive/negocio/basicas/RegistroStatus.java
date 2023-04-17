@@ -3,6 +3,8 @@ package br.com.ufape.bcc.taskhive.negocio.basicas;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,14 +18,25 @@ public class RegistroStatus {
 	private Long id;
 
 	@OneToMany
-	private List<TarefaAbstrata> tarefa;
+	private List<Tarefa> tarefa;
 
+	@OneToMany
+	private List<TarefaLista> tarefa_lista;
+
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data_registro;
 
 	@OneToMany
 	private List<Status> status;
 
 	public RegistroStatus() {
+		this.data_registro = new Date();
+	}
+
+	public RegistroStatus(List<Tarefa> tarefa, List<Tarefa> tarefa_lista, List<Status> status) {
+		this.tarefa = tarefa;
+		this.status = status;
+		this.data_registro = new Date();
 	}
 
 	public Long getId() {
@@ -32,14 +45,6 @@ public class RegistroStatus {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public List<TarefaAbstrata> getTarefa() {
-		return tarefa;
-	}
-
-	public void setTarefa(List<TarefaAbstrata> tarefa) {
-		this.tarefa = tarefa;
 	}
 
 	public Date getData_registro() {
@@ -56,6 +61,22 @@ public class RegistroStatus {
 
 	public void setStatus(List<Status> status) {
 		this.status = status;
+	}
+
+	public List<Tarefa> getTarefa() {
+		return tarefa;
+	}
+
+	public void setTarefa(List<Tarefa> tarefa) {
+		this.tarefa = tarefa;
+	}
+
+	public List<TarefaLista> getTarefa_lista() {
+		return tarefa_lista;
+	}
+
+	public void setTarefa_lista(List<TarefaLista> tarefa_lista) {
+		this.tarefa_lista = tarefa_lista;
 	}
 	
 }
