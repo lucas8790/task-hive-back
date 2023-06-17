@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.com.ufape.bcc.taskhive.negocio.cadastro.InterfaceCadastroComentario;
 import br.com.ufape.bcc.taskhive.negocio.basicas.Comentario;
 import br.com.ufape.bcc.taskhive.negocio.cadastro.CadastroComentario;
 
@@ -18,13 +19,12 @@ public class ComentarioTest{
     private CadastroComentario cadastroComentario;
 
     @Test
-    public void testeAdicionarComentario() {
-        String mensagem = "Teste de comentário";
-        Comentario comentario = new Comentario(mensagem);
-        cadastroComentario.adicionarComentario(comentario);
-        Comentario comentarioSalvo = cadastroComentario.buscarComentarioPorMensagem(mensagem);
+    public void testAdicionarComentario() {
+        Comentario comentario = new Comentario("Este é um comentário de teste");
+        cadastroComentario.salvarComentario(comentario);
+        Comentario comentarioSalvo = cadastroComentario.buscarComentarioPorId(comentario.getId());
         assertNotNull(comentarioSalvo);
-        assertEquals(mensagem, comentarioSalvo.getMensagem());
+        assertEquals(comentario.getMensagem(), comentarioSalvo.getMensagem());
     }
 
     @Test
